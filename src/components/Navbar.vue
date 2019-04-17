@@ -1,9 +1,7 @@
 <template>
   <div>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <base-nav type="default" effect="dark" expand title="Raffle.com" class="mt-0">
       <div class="container">
-        <a class="navbar-brand" href="#">Raffle.com</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -30,14 +28,37 @@
               <a class="nav-link" href="#">Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" :href="status.link">{{status.text}}</a>
             </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </base-nav>
   </div>
 </template>
 <script>
-export default {};
+import BaseNav from "./BaseNav.vue";
+
+export default {
+  name: "Navbar",
+  components: {
+    BaseNav
+  },
+  data() {
+    return {
+      status: {
+        text: "Login",
+        link: "/#/login"
+      }
+    };
+  },
+  method: {}
+};
 </script>
+<style lang="css">
+body {
+  padding-top: 0px;
+  margin: 0px;
+}
+</style>
+

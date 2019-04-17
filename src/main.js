@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './routes';
 import BootstrapVue from 'bootstrap-vue'
+import Argon from "./plugins/argon-kit";
 Vue.use(BootstrapVue)
 
 import axios from 'axios'
