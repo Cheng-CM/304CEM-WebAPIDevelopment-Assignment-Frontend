@@ -1,17 +1,14 @@
 <template>
   <div>
-    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/business-frontpage.css" rel="stylesheet"> -->
-
     <!-- Header -->
     <header class="bg-primary py-5 mb-5">
       <div class="container h-100">
         <div class="row h-100 align-items-center">
           <div class="col-lg-12">
-            <h1 class="display-4 text-white mt-5 mb-2">Business Name or Tagline</h1>
+            <h1 class="display-4 text-white mt-5 mb-2">Raffle and Lottery for donating free stuff!</h1>
             <p
               class="lead mb-5 text-white-50"
-            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non possimus ab labore provident mollitia. Id assumenda voluptate earum corporis facere quibusdam quisquam iste ipsa cumque unde nisi, totam quas ipsam.</p>
+            >Donate free books, furtinture, kitchen appliances to others.</p>
           </div>
         </div>
       </div>
@@ -23,15 +20,14 @@
         <div class="col-md-8 mb-5">
           <h2>What We Do</h2>
           <hr>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
-          <a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>
+          <p>We promote recycling and saving earth through donating and give stuff to people in needs.</p>
+          <a class="btn btn-primary btn-lg" href="#">Take part now &raquo;</a>
         </div>
         <div class="col-md-4 mb-5">
-          <h2>Contact Us</h2>
+          <h2>Hotest Item</h2>
           <hr>
           <address>
-            <strong>Start Bootstrap</strong>
+            <strong></strong>
             <br>3481 Melrose Place
             <br>Beverly Hills, CA 90210
             <br>

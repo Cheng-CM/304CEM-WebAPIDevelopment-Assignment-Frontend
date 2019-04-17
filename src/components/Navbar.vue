@@ -3,7 +3,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">Raffle.com</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/">
                 Home
                 <span class="sr-only">(current)</span>
               </a>

@@ -3,14 +3,16 @@ import Router from 'vue-router';
 
 // import Login from '@/pages/Login/Login';
 // import ErrorPage from '@/pages/Error/Error';
-
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 // Main
 import Main from '@/components/Main.vue';
 
 Vue.use(Router);
 
 export default new Router({
-    mode: 'history',
+    linkExactActiveClass: "active",
+    // mode: 'history',
     routes: [
         //   {
         //   path: '/login',
@@ -25,7 +27,9 @@ export default new Router({
         {
             path: '/',
             name: 'Main',
+            header: Navbar,
             component: Main,
+            footer: Footer
         },
     ],
 });
