@@ -19,8 +19,10 @@
     "style-loader": "^0.23.1",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
+    "vue-cookies": "^1.5.13",
     "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.6",
+    "vue-session": "^1.0.0",
     "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {

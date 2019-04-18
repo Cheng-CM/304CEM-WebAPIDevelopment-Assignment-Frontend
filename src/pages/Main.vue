@@ -95,7 +95,12 @@
 
 <script>
 export default {
-  name: "HelloWorld"
+  name: "HelloWorld",
+  methods: {
+    
+  },
+  created(){
+  }
 };
 </script>
 
