@@ -1,14 +1,14 @@
 <template>
   <div>
     <!-- Header -->
-    <header class="bg-primary py-5 mb-5">
+    <header class="bg-primary py-5 mb-5 bgimg">
       <div class="container h-100">
         <div class="row h-100 align-items-center">
           <div class="col-lg-12">
             <h1 class="display-4 text-white mt-5 mb-2">Raffle and Lottery for donating free stuff!</h1>
             <p
               class="lead mb-5 text-white-50"
-            >Donate free books, furtinture, kitchen appliances to others.</p>
+            >Donate free books, furnitures, kitchen appliances to others.</p>
           </div>
         </div>
       </div>
@@ -44,45 +44,16 @@
       <!-- /.row -->
 
       <div class="row">
-        <div class="col-md-4 mb-5">
+        <div v-for="item in raffles" class="col-md-4 mb-5">
           <div class="card h-100">
-            <img class="card-img-top" src="http://placehold.it/300x200" alt>
+            <img class="card-img-top" :src="`data:image/jpeg;base64,` + item.img">
+            <!-- <img class="card-img-top" src="http://placehold.it/300x200" alt> -->
             <div class="card-body">
-              <h4 class="card-title">Card title</h4>
-              <p
-                class="card-text"
-              >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus.</p>
+              <h4 class="card-title">{{item.name}}</h4>
+              <p class="card-text">{{item.description}}</p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary">Find Out More!</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">
-            <img class="card-img-top" src="http://placehold.it/300x200" alt>
-            <div class="card-body">
-              <h4 class="card-title">Card title</h4>
-              <p
-                class="card-text"
-              >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus totam ut praesentium aut.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Find Out More!</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">
-            <img class="card-img-top" src="http://placehold.it/300x200" alt>
-            <div class="card-body">
-              <h4 class="card-title">Card title</h4>
-              <p
-                class="card-text"
-              >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Find Out More!</a>
+              <a :href="`/raffle/`+item._id" class="btn btn-primary">Check it out</a>
             </div>
           </div>
         </div>
@@ -94,13 +65,39 @@
 </template>
 
 <script>
+import RaffleAPI from "../api/raffle.js";
+import ItemAPI from "../api/item.js";
 export default {
-  name: "HelloWorld",
-  methods: {
-    
+  name: "Main",
+  data() {
+    return {
+      raffles: []
+    };
   },
-  created(){
-  }
+  methods: {
+    async getRaffle() {
+      var res = await RaffleAPI.findActive();
+      for (let i = 0; i < res.data.length; i++) {
+        const element = await ItemAPI.findItemById(res.data[i].item);
+        res.data[i].img = this._arrayBufferToBase64(element.data.img.data.data);
+      }
+      this.raffles = res.data;
+      console.log(this.raffles);
+    },
+    _arrayBufferToBase64(buffer) {
+      var binary = "";
+      var bytes = new Uint8Array(buffer);
+      var len = bytes.byteLength;
+      for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return window.btoa(binary);
+    }
+  },
+  created() {
+    this.getRaffle();
+  },
+  mounted() {}
 };
 </script>
 
@@ -115,5 +112,9 @@ export default {
   color: #2c3e50;
   margin-top: 0px;
   padding-top: 0px;
+}
+.bgimg {
+  background-image: url("../assets/Theme.jpg");
+  background-size: cover;
 }
 </style>

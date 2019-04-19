@@ -18,43 +18,57 @@
             shadow
             header-classes="bg-white pb-5"
             body-classes="px-lg-5 py-lg-5"
-            class="border-0"
+            class="border-0 outline-info"
           >
             <template>
               <div class="text-neutral text-center mb-4">
-                <p>Sign in</p>
+                <p>Registration</p>
               </div>
             </template>
             <template>
               <form role="form" method="post">
                 <base-input
                   v-model="email"
-                  class="mb-3"
+                  type="email"
                   placeholder="Email"
+                  class="mb-3"
                   addon-left-icon="ni ni-email-83"
                 ></base-input>
                 <base-input
-                  v-model="password"
-                  type="password"
-                  placeholder="Password"
-                  addon-left-icon="ni ni-lock-circle-open"
+                  v-model="username"
+                  placeholder="Username"
+                  class="mb-3"
+                  addon-left-icon="ni ni-badge"
                 ></base-input>
-                <!-- <base-checkbox class="text-muted">Remember me</base-checkbox> -->
+                <base-input
+                  v-model="password"
+                  placeholder="Password"
+                  class="mb-3"
+                  addon-left-icon="ni ni-lock-circle-open"
+                  type="password"
+                ></base-input>
+                <base-input
+                  v-model="passwordconf"
+                  placeholder="Confirm Password"
+                  addon-left-icon="ni ni-lock-circle-open"
+                  class="mb-3"
+                  type="password"
+                ></base-input>
                 <div class="text-center">
-                  <base-button type="success" class="my-4" @click="signin()">Sign In</base-button>
+                  <base-button type="success" class="my-4" @click="register()">Register</base-button>
                 </div>
               </form>
-              <div class="col-8 center">
+              <div class="col-10 center">
                 <p class="text-warning">
                   <small>{{ status }}</small>
                 </p>
               </div>
             </template>
           </card>
-          <div class="row mt-3">
-            <div class="col-6 text-center">
-              <a href="/register" class="text-light text-center">
-                <small>Create new account</small>
+           <div class="row mt-3">
+            <div class="col-8 text-center">
+              <a href="/login" class="text-light text-center">
+                <small>Already have account? Click here!</small>
               </a>
             </div>
           </div>
@@ -64,40 +78,36 @@
   </div>
 </template>
 <script>
-import BaseButton from "../components/BaseButton.vue";
-import BaseInput from "../components/BaseInput.vue";
-import Card from "../components/Card.vue";
 import AccountAPI from "../api/user.js";
-export default { 
-  name: "login",
-  components: {
-    BaseButton,
-    BaseInput,
-    Card
-  },
+export default {
+  name: "Register",
   data() {
     return {
       email: "",
+      username: "",
       password: "",
+      passwordconf: "",
       status: ""
     };
   },
   methods: {
-    async signin() {
-      if (this.email && this.password) {
-        var params = {
-          email: this.email,
-          password: this.password
-        };
-        var response = await AccountAPI.login(params);
-        this.status = response.data.message;
-        if (response.data.status == "success") {
-          this.$cookies.set("UserId", response.data.data.User, "1y");
-          this.$router.push("/");
-          location.reload();
+    async register() {
+      if (this.email && this.username && this.password && this.passwordconf) {
+        if (this.password == this.passwordconf) {
+          var params;
+          params = {
+            email: this.email,
+            username: this.username,
+            password: this.password,
+            passwordConf: this.passwordconf
+          };
+          var res = await AccountAPI.register(params);
+          console.log(res);
+        } else {
+          this.status = "Password does not match.";
         }
       } else {
-        this.status = "Enter email and password.";
+        this.status = "Please enter vaild information.";
       }
     }
   },
@@ -108,14 +118,3 @@ export default {
   }
 };
 </script>
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 0px;
-  padding-top: 0px;
-}
-</style>
