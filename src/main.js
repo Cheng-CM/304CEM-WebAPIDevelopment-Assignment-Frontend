@@ -14,6 +14,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios);
 
+import ImageUploader from 'vue-image-upload-resize'
+Vue.use(ImageUploader);
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 

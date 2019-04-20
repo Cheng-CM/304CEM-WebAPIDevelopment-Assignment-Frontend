@@ -93,6 +93,7 @@ export default {
         this.status = response.data.message;
         if (response.data.status == "success") {
           this.$cookies.set("UserId", response.data.data.User, "1y");
+          this.$cookies.set("token", response.data.data.token,'1y')
           this.$router.push("/");
           location.reload();
         }

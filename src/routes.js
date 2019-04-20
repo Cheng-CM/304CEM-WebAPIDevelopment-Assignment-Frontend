@@ -6,7 +6,8 @@ import Login from './pages/Login.vue';
 import Navbar from "./pages/Navbar.vue";
 import Footer from "./pages/Footer.vue";
 import Register from './pages/Register.vue'
-import CreateRaffle from './pages/CreateRaffle.vue'
+import Item from './pages/CreateItem.vue'
+import Raffle from './pages/Raffle.vue'
 // Main
 import Main from '@/pages/Main.vue';
 
@@ -32,9 +33,14 @@ export default new Router({
             name: 'Register',
             component: Register
         }, {
-            path: '/CreateRaffle',
-            name: 'CreateRaffle',
-            component: CreateRaffle
-        }
+            path: '/Item',
+            name: 'Item',
+            component: Item
+        },
+        {
+            path: '/Raffle',
+            name: 'Raffle',
+            component: Raffle
+        },
     ],
 });

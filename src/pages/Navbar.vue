@@ -24,13 +24,12 @@
 </template>
 <script>
 import BaseNav from "../components/BaseNav.vue";
-import CloseButton from "../components/CloseButton";
 import AccountAPI from "../api/user.js";
 export default {
   name: "Navbar",
   components: {
     BaseNav,
-    CloseButton
+    
   },
   data() {
     return {
@@ -47,6 +46,7 @@ export default {
     },
     async signout() {
       await AccountAPI.destoryCookies(this.$cookies.get("UserId"));
+      this.$cookies.remove(this.$cookies.get("UserId"));
       this.$cookies.remove("UserId");
       this.$root.reload();
       this.$router.push("/");
@@ -57,7 +57,7 @@ export default {
 
     // }
   },
-  mounted() {
+  created() {
     this.getUserByCookies();
     // this.getCookies();
   }

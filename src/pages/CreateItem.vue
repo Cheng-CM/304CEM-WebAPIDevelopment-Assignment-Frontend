@@ -1,11 +1,6 @@
 <template>
   <div class="col">
-    <base-button
-      block
-      type="success"
-      class="mb-1"
-      @click="modal = true, getItemByUserId(),clear();"
-    >Create Raffle</base-button>
+    <base-button block type="success" class="mb-1" @click="modal = true">Create Item</base-button>
     <modal :show.sync="modal" body-classes="p-0" modal-classes="modal-dialog-centered modal">
       <card
         type="neutral"
@@ -16,26 +11,29 @@
       >
         <template>
           <div class="text-center mb-4">
-            <p v-if="items.length > 0">Create raffle</p>
-            <p v-else>Create an item first!</p>
+            <p>Create Item</p>
           </div>
-          <form role="form" v-bind:key="item.id" v-for="item in items">
-            <base-input class="mb-3" placeholder="Raffle Name" v-model="name"></base-input>
+          <form role="form">
+            <base-input class="mb-3" placeholder="Item Name" v-model="name"></base-input>
             <textarea
               class="form-control mb-3"
               rows="3"
               v-model="description"
-              placeholder="Raffle Description"
+              placeholder="Item Description"
             ></textarea>
-            <base-dropdown>
-              <base-button slot="title" type="secondary" class="dropdown-toggle">Item</base-button>
-              <a
-                class="dropdown-item"
-                href="#"
-                @click="changeImg(item.img),itemId = item._id"
-              >{{item.name}}</a>
-            </base-dropdown>
-            <img v-if="img" class="card-img-top" :src="`data:image/jpeg;base64,` + img">
+            <image-uploader
+              :debug="1"
+              :maxWidth="512"
+              :quality="1"
+              :autoRotate="true"
+              outputFormat="verbose"
+              :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
+              accept="image/*"
+              doNotResize="['gif', 'svg']"
+              @input="setImage"
+              @onUpload="startImageResize"
+              @onComplete="endImageResize"
+            ></image-uploader>
             <div class="text-center">
               <base-button type="primary" class="my-4" @click="createRaffle()">Create</base-button>
             </div>
@@ -54,9 +52,8 @@ import BaseButton from "../components/BaseButton.vue";
 import BaseDropdown from "../components/BaseDropdown.vue";
 import Modal from "../components/Modal.vue";
 import ItemAPI from "../api/item.js";
-import RaffleAPI from "../api/raffle.js";
 export default {
-  name: "create-raffle",
+  name: "create-item",
   components: {
     Modal,
     BaseInput,
@@ -91,12 +88,6 @@ export default {
         return "";
       }
     },
-    async getItemByUserId() {
-      var id = await this.getIdByCookies();
-      var res = await ItemAPI.findItemByCreated(id);
-      this.items = res.data;
-      this.clear();
-    },
     _arrayBufferToBase64(buffer) {
       var binary = "";
       var bytes = new Uint8Array(buffer);
@@ -109,16 +100,7 @@ export default {
     changeImg(img) {
       this.img = this._arrayBufferToBase64(img.data.data);
     },
-    clear() {
-      this.img = "";
-      this.status = "";
-      if (this.items.length <= 0) {
-        this.status = "You don't have an item!";
-      } else {
-        this.status = "";
-      }
-    },
-    async createRaffle() {
+    async createItem() {
       if (this.name && this.description && this.itemId) {
         var params = {
           name: this.name,
@@ -128,7 +110,7 @@ export default {
         };
         var jwt = await this.getTokenByCookies();
 
-        await RaffleAPI.create(params, jwt);
+        // await RaffleAPI.create(params, jwt);
         this.modal = false;
       } else {
         this.status = "Invaild Information.";
