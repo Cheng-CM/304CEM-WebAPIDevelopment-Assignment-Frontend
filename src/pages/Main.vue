@@ -21,24 +21,13 @@
           <h2>What We Do</h2>
           <hr>
           <p>We promote recycling and saving earth through donating and give stuff to people in needs.</p>
-          <a class="btn btn-primary btn-lg" href="#">Take part now &raquo;</a>
+          <a class="btn btn-primary btn-lg" href="/raffles">Take part now &raquo;</a>
         </div>
         <div class="col-md-4 mb-5">
-          <h2>Hotest Item</h2>
+          <h2>How to Use</h2>
           <hr>
-          <address>
-            <strong></strong>
-            <br>3481 Melrose Place
-            <br>Beverly Hills, CA 90210
-            <br>
-          </address>
-          <address>
-            <abbr title="Phone">P:</abbr>
-            (123) 456-7890
-            <br>
-            <abbr title="Email">E:</abbr>
-            <a href="mailto:#">name@example.com</a>
-          </address>
+          <p>If you see any items you want, click the item and join the raffle. </p>
+          
         </div>
       </div>
       <!-- /.row -->
@@ -46,8 +35,8 @@
       <div class="row">
         <div v-for="item in raffles" v-bind:key='item._id' class="col-md-4 mb-5">
           <div class="card h-100">
-            <img class="card-img-top" :src="`data:image/jpeg;base64,` + item.img">
-            <!-- <img class="card-img-top" src="http://placehold.it/300x200" alt> -->
+            <img class="card-img-top" :src="item.img">
+        
             <div class="card-body">
               <h4 class="card-title">{{item.name}}</h4>
               <p class="card-text">{{item.description}}</p>
@@ -79,19 +68,10 @@ export default {
       var res = await RaffleAPI.findActive();
       for (let i = 0; i < res.data.length; i++) {
         const element = await ItemAPI.findItemById(res.data[i].item);
-        res.data[i].img = this._arrayBufferToBase64(element.data.img.data.data);
+        res.data[i].img = element.data.img;
       }
       this.raffles = res.data;
       // console.log(this.raffles);
-    },
-    _arrayBufferToBase64(buffer) {
-      var binary = "";
-      var bytes = new Uint8Array(buffer);
-      var len = bytes.byteLength;
-      for (var i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
-      }
-      return window.btoa(binary);
     }
   },
   created() {

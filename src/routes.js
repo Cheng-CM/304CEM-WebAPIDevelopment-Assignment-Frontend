@@ -6,8 +6,10 @@ import Login from './pages/Login.vue';
 import Navbar from "./pages/Navbar.vue";
 import Footer from "./pages/Footer.vue";
 import Register from './pages/Register.vue'
-import Item from './pages/CreateItem.vue'
 import Raffle from './pages/Raffle.vue'
+import Profile from './pages/Profile.vue'
+import ItemRaffle from './pages/ItemRaffle.vue'
+import Item from './pages/item.vue'
 // Main
 import Main from '@/pages/Main.vue';
 
@@ -32,15 +34,23 @@ export default new Router({
             path: '/register',
             name: 'Register',
             component: Register
-        }, {
-            path: '/Item',
-            name: 'Item',
-            component: Item
         },
         {
-            path: '/Raffle',
+            path: '/Raffles',
             name: 'Raffle',
             component: Raffle
+        }, {
+            path: '/Profile/:id',
+            name: 'Profile',
+            component: Profile
+        }, {
+            path: '/Raffle/:id',
+            name: 'ItemRaffle',
+            component: ItemRaffle
+        }, {
+            path: '/Item/:id',
+            name: 'Item',
+            component: Item
         },
     ],
 });

@@ -19,7 +19,7 @@
             <p v-if="items.length > 0">Create raffle</p>
             <p v-else>Create an item first!</p>
           </div>
-          <form role="form" v-bind:key="item.id" v-for="item in items">
+          <form role="form" v-if="items.length > 0">
             <base-input class="mb-3" placeholder="Raffle Name" v-model="name"></base-input>
             <textarea
               class="form-control mb-3"
@@ -30,12 +30,14 @@
             <base-dropdown>
               <base-button slot="title" type="secondary" class="dropdown-toggle">Item</base-button>
               <a
+                v-bind:key="item.id"
+                v-for="item in items"
                 class="dropdown-item"
                 href="#"
-                @click="changeImg(item.img),itemId = item._id"
+                @click="changeImg(item.img), itemId = item._id"
               >{{item.name}}</a>
             </base-dropdown>
-            <img v-if="img" class="card-img-top" :src="`data:image/jpeg;base64,` + img">
+            <img v-if="img" class="card-img-top" :src="img">
             <div class="text-center">
               <base-button type="primary" class="my-4" @click="createRaffle()">Create</base-button>
             </div>
@@ -107,7 +109,7 @@ export default {
       return window.btoa(binary);
     },
     changeImg(img) {
-      this.img = this._arrayBufferToBase64(img.data.data);
+      this.img = img;
     },
     clear() {
       this.img = "";

@@ -2,16 +2,23 @@
   <div>
     <base-nav type="default" effect="dark" expand title="Raffle.com" class="mt-0">
       <ul class="navbar-nav ml-lg-auto">
-        <li class="nav-item col-3">
+        <li class="nav-item col-4">
           <a class="nav-link" href="/">Home</a>
         </li>
-        <li class="nav-item col-3">
+        <li class="nav-item col-4">
           <a class="nav-link" v-if="this.$cookies.get('UserId')" href @click="signout()">Logout</a>
           <a class="nav-link" v-else href="/login">Login</a>
         </li>
-        <li class="nav-item col-5">
-          <a class="nav-link" v-if="this.$cookies.get('UserId')" href="/profile">{{ userName }}</a>
+        <li class="nav-item col-4">
+          <a
+            class="nav-link"
+            v-if="this.$cookies.get('UserId')"
+            :href="`/profile/` +this.$cookies.get('UserId') "
+          >{{ userName }}</a>
           <a class="nav-link" v-else href="/register">Register</a>
+        </li>
+        <li class="nav-item col-4">
+          <a class="nav-link" v-if="this.$cookies.get('UserId')" href="/Raffles">Your Items</a>
         </li>
       </ul>
       <div class="container">
@@ -28,8 +35,7 @@ import AccountAPI from "../api/user.js";
 export default {
   name: "Navbar",
   components: {
-    BaseNav,
-    
+    BaseNav
   },
   data() {
     return {

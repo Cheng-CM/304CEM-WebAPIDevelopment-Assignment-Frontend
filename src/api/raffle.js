@@ -17,13 +17,9 @@ class RaffleAPI {
     );
 
 
-    findCreatedBy = (params, jwt) => Vue.axios.get(
-        'http://localhost:3000/private/CreatedBy/' +
-        params, {
-            headers: {
-                "x-access-token": jwt
-            }
-        }
+    findCreatedBy = (params) => Vue.axios.get(
+        'http://localhost:3000/public/Raffle/CreatedBy/' +
+        params
     );
 
 
@@ -49,7 +45,7 @@ class RaffleAPI {
 
     updateStatus = (id, status, jwt) => Vue.axios.put(
         'http://localhost:3000/private/Raffle/Id/' + id + "/status/" +
-        status, {
+        status, id, {
             headers: {
                 "x-access-token": jwt
             }
@@ -57,8 +53,8 @@ class RaffleAPI {
     );
 
     join = (id, user, jwt) => Vue.axios.put(
-        'http://localhost:3000/private/Raffle/Id/' + id + "/u/" +
-        user, {
+        'http://localhost:3000/private/Join/' + id + "/u/" +
+        user, id, {
             headers: {
                 "x-access-token": jwt
             }

@@ -1,7 +1,7 @@
 <template>
   <div class="col">
-    <base-button block type="success" class="mb-1" @click="modal = true">Create Item</base-button>
-    <modal :show.sync="modal" body-classes="p-0" modal-classes="modal-dialog-centered modal">
+    <base-button block type="warning" class="mb-1" @click=" modal2 = true, loadItem(item)">Edit Item</base-button>
+    <modal :show.sync="modal2" body-classes="p-0" modal-classes="modal-dialog-centered modal">
       <card
         type="neutral"
         shadow
@@ -11,7 +11,7 @@
       >
         <template>
           <div class="text-center mb-4">
-            <p>Create Item</p>
+            <p>Edit Item</p>
           </div>
           <form role="form">
             <base-input class="mb-3" placeholder="Item Name" v-model="name"></base-input>
@@ -49,7 +49,7 @@ import BaseButton from "../components/BaseButton.vue";
 import Modal from "../components/Modal.vue";
 import ItemAPI from "../api/item.js";
 export default {
-  name: "create-item",
+  name: "edit-item",
   components: {
     Modal,
     BaseInput,
@@ -57,11 +57,12 @@ export default {
   },
   data() {
     return {
-      modal: false,
+      modal2: false,
       name: "",
       description: "",
       status: "",
-      img: ""
+      img: "",
+      item: ""
     };
   },
   methods: {
@@ -87,23 +88,30 @@ export default {
       this.name = "";
       this.description = "";
     },
-    async createItem() {
-      if (this.name && this.description && this.img) {
+    async editItem() {
+      if (this.name && this.description && this.img && this.id) {
         var params = {
           name: this.name,
           description: this.description,
-          createdBy: await this.getIdByCookies(),
           img: this.img
         };
+
         var jwt = await this.getTokenByCookies();
 
-        var res = await ItemAPI.create(params, jwt);
+        var res = await ItemAPI.updateById(params, this.id, jwt);
 
         this.modal = false;
         this.clear();
       } else {
         this.status = "Invaild Information.";
       }
+    },
+    loadItem(item) {
+      this.img = item.img;
+      this.name = item.name;
+      this.description = item.description;
+      console.log(item);
+      
     }
   }
 };
