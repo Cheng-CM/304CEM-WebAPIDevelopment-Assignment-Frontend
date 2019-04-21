@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue';
 class AccountAPI {
 
@@ -6,6 +7,8 @@ class AccountAPI {
     register = (params) => Vue.axios.post('http://localhost:3000/public/register', params);
 
     getUserInfo = (userId) => Vue.axios.get('http://localhost:3000/public/User/Id/' + userId);
+
+    getUserInfoByName = (name) => Vue.axios.get('http://localhost:3000/public/User/Id/' + name);
 
     getCookies = () => Vue.axios.get('http://localhost:3000/public/cookies/');
 

@@ -44,7 +44,7 @@
       <!-- /.row -->
 
       <div class="row">
-        <div v-for="item in raffles" class="col-md-4 mb-5">
+        <div v-for="item in raffles" v-bind:key='item._id' class="col-md-4 mb-5">
           <div class="card h-100">
             <img class="card-img-top" :src="`data:image/jpeg;base64,` + item.img">
             <!-- <img class="card-img-top" src="http://placehold.it/300x200" alt> -->
@@ -82,7 +82,7 @@ export default {
         res.data[i].img = this._arrayBufferToBase64(element.data.img.data.data);
       }
       this.raffles = res.data;
-      console.log(this.raffles);
+      // console.log(this.raffles);
     },
     _arrayBufferToBase64(buffer) {
       var binary = "";
