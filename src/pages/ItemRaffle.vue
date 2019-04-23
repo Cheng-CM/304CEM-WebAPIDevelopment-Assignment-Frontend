@@ -111,26 +111,18 @@ export default {
       this.user.username = user.data.username;
       for (let i = 0; i < this.raffle.joined.length; i++) {
         const element = this.raffle.joined[i];
-        var res = await AccountAPI.getUserInfo(element);
-        console.log(res);
+        await AccountAPI.getUserInfo(element);
+
         this.joinedUser[i] = res.data.username;
       }
-      console.log(this.joinedUser);
-      
     },
     joinCheck() {
       return this.$cookies.get("UserId") != this.user.id;
     },
     async join() {
       var jwt = await this.$cookies.get("token");
-      console.log(jwt)
-      console.log(this.raffle.id, this.$cookies.get("UserId"));
-      var res = await RaffleAPI.join(
-        this.raffle.id,
-        this.$cookies.get("UserId"),
-        jwt
-      );
-      console.log(res);
+
+      await RaffleAPI.join(this.raffle.id, this.$cookies.get("UserId"), jwt);
     }
   },
   created() {

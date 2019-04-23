@@ -97,7 +97,7 @@ export default {
         };
         var jwt = await this.getTokenByCookies();
 
-        var res = await ItemAPI.create(params, jwt);
+        await ItemAPI.create(params, jwt);
 
         this.modal = false;
         this.clear();

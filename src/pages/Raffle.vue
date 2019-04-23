@@ -123,7 +123,6 @@
             <i class="ni ni-bell-55 ni-3x"></i>
             <p>Delete raffle that use the item first then the Item.</p>
           </div>
-
           <template slot="footer">
             <base-button type="link" text-color="white" class="ml-auto" @click="modal = false">Close</base-button>
           </template>
@@ -220,7 +219,6 @@ import BaseDropdown from "../components/BaseDropdown.vue";
 import Modal from "../components/Modal.vue";
 import CreateRaffle from "./CreateRaffle.vue";
 import CreateItem from "./CreateItem.vue";
-import EditItem from "./EditItem.vue";
 import ItemAPI from "../api/item.js";
 import RaffleAPI from "../api/raffle.js";
 
@@ -260,7 +258,6 @@ export default {
     async deleteItem(id) {
       var jwt = this.$cookies.get("token");
       var res = await ItemAPI.deletebyId(id, jwt);
-      console.log(res);
 
       if (res.data == "Delete Raffle first then Item.") {
         this.modal = true;
@@ -284,12 +281,10 @@ export default {
           description: this.item.description,
           img: this.item.img
         };
-        console.log(params);
 
         var jwt = await this.getTokenByCookies();
 
-        var res = await ItemAPI.updateById(this.item.id, params, jwt);
-        console.log(res);
+        await ItemAPI.updateById(this.item.id, params, jwt);
         this.modal2 = false;
       } else {
         this.status = "Invaild Information.";
@@ -297,22 +292,16 @@ export default {
       this.update();
     },
     async updateRaffle() {
-     if (
-        this.raffle.name &&
-        this.raffle.description &&
-        this.raffle.item
-      ) {
+      if (this.raffle.name && this.raffle.description && this.raffle.item) {
         var params = {
           name: this.raffle.name,
           description: this.raffle.description,
           item: this.raffle.item
         };
-        console.log(params);
 
         var jwt = await this.getTokenByCookies();
 
-        var res = await RaffleAPI.updateById(this.raffle.id, params, jwt);
-        console.log(res);
+        await RaffleAPI.updateById(this.raffle.id, params, jwt);
         this.modal3 = false;
       } else {
         this.status = "Invaild Information.";
@@ -321,25 +310,22 @@ export default {
     },
     async changeStatus(raffle, boolean) {
       var jwt = this.$cookies.get("token");
-      var res = await RaffleAPI.updateStatus(raffle._id, boolean, jwt);
+      await RaffleAPI.updateStatus(raffle._id, boolean, jwt);
 
       raffle._id = boolean;
       this.update();
-      console.log(raffle);
     },
     loadItem(item) {
       this.item.img = item.img;
       this.item.name = item.name;
       this.item.description = item.description;
       this.item.id = item._id;
-      console.log(item);
     },
     loadRaffle(item) {
       this.raffle.img = item.img;
       this.raffle.name = item.name;
       this.raffle.description = item.description;
       this.raffle.id = item._id;
-      console.log(item);
     }
   },
   async created() {
@@ -353,7 +339,6 @@ export default {
     BaseDropdown,
     CreateRaffle,
     CreateItem,
-    EditItem,
     Modal
   }
 };

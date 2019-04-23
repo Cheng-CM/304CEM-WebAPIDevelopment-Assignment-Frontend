@@ -47,8 +47,6 @@ export default {
   },
   methods: {
     async loadProfile() {
-      console.log(this.$route.params.id);
-      
       var res = await AccountAPI.getUserInfo(this.$route.params.id);
       this.id = res.data.id;
       this.username = res.data.username;

@@ -101,8 +101,7 @@ export default {
             password: this.password,
             passwordConf: this.passwordconf
           };
-          var res = await AccountAPI.register(params);
-          console.log(res);
+          await AccountAPI.register(params);
         } else {
           this.status = "Password does not match.";
         }
