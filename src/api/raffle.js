@@ -1,14 +1,15 @@
 import Vue from 'vue';
+var url = 'https://backend304cem7363.herokuapp.com';
 class RaffleAPI {
 
-    findActive = () => Vue.axios.get('http://localhost:3000/public/Raffle/active');
-    findAll = () => Vue.axios.get('http://localhost:3000/public/Raffle/all');
-    findRaffleById = (param) => Vue.axios.get('http://localhost:3000/public/Raffle/Id/' + param);
+    findActive = () => Vue.axios.get( 'https://backend304cem7363.herokuapp.com/public/Raffle/active');
+    findAll = () => Vue.axios.get(  'https://backend304cem7363.herokuapp.com/public/Raffle/all');
+    findRaffleById = (param) => Vue.axios.get(  'https://backend304cem7363.herokuapp.com/public/Raffle/Id/' + param);
 
 
 
     findJoined = (params, jwt) => Vue.axios.get(
-        'http://localhost:3000/private/joined/' +
+        'https://backend304cem7363.herokuapp.com/private/joined/' +
         params, {
             headers: {
                 "x-access-token": jwt
@@ -18,13 +19,13 @@ class RaffleAPI {
 
 
     findCreatedBy = (params) => Vue.axios.get(
-        'http://localhost:3000/public/Raffle/CreatedBy/' +
+         'https://backend304cem7363.herokuapp.com/public/Raffle/CreatedBy/' +
         params
     );
 
 
     create = (params, jwt) => Vue.axios.post(
-        'http://localhost:3000/private/Raffle',
+      'https://backend304cem7363.herokuapp.com/private/Raffle',
         params, {
             headers: {
                 "x-access-token": jwt
@@ -34,7 +35,7 @@ class RaffleAPI {
 
 
     updateById = (id, params, jwt) => Vue.axios.put(
-        'http://localhost:3000/private/Raffle/Id/' + id,
+        'https://backend304cem7363.herokuapp.com/private/Raffle/Id/' + id,
         params, {
             headers: {
                 "x-access-token": jwt
@@ -44,7 +45,7 @@ class RaffleAPI {
 
 
     updateStatus = (id, status, jwt) => Vue.axios.put(
-        'http://localhost:3000/private/Raffle/Id/' + id + "/status/" +
+        'https://backend304cem7363.herokuapp.com/private/Raffle/Id/' + id + "/status/" +
         status, id, {
             headers: {
                 "x-access-token": jwt
@@ -53,7 +54,7 @@ class RaffleAPI {
     );
 
     join = (id, user, jwt) => Vue.axios.put(
-        'http://localhost:3000/private/Join/' + id + "/u/" +
+        'https://backend304cem7363.herokuapp.com/private/Join/' + id + "/u/" +
         user, id, {
             headers: {
                 "x-access-token": jwt
@@ -62,7 +63,7 @@ class RaffleAPI {
     );
 
     deletebyId = (id, jwt) => Vue.axios.delete(
-        'http://localhost:3000/private/Raffle/Id/' + id, {
+        'https://backend304cem7363.herokuapp.com/private/Raffle/Id/' + id, {
             headers: {
                 "x-access-token": jwt
             }

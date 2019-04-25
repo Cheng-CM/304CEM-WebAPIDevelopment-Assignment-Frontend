@@ -1,13 +1,12 @@
 import Vue from 'vue';
-var url = 'https://backend304cem7363.herokuapp.com';
+
 class ItemAPI {
+    findItemById = (param) => Vue.axios.get('https://backend304cem7363.herokuapp.com/public/item/id/' + param);
 
-    findItemById = (param) => Vue.axios.get( url + '/public/item/id/' + param);
-
-    findItemByCreated = (param) => Vue.axios.get(url + '/public/Item/Created/' + param);
+    findItemByCreated = (param) => Vue.axios.get('https://backend304cem7363.herokuapp.com/public/Item/Created/' + param);
 
     create = (params, jwt) => Vue.axios.post(
-        url + '/private/Item',
+        'https://backend304cem7363.herokuapp.com/private/Item',
         params, {
             headers: {
                 "x-access-token": jwt
@@ -17,7 +16,7 @@ class ItemAPI {
 
 
     updateById = (id, params, jwt) => Vue.axios.put(
-        url + '/private/Item/Id/' + id,
+        'https://backend304cem7363.herokuapp.com/private/Item/Id/' + id,
         params, {
             headers: {
                 "x-access-token": jwt
@@ -26,7 +25,7 @@ class ItemAPI {
     );
 
     deletebyId = (id, jwt) => Vue.axios.delete(
-        url + '/private/Item/Id/' + id, {
+        'https://backend304cem7363.herokuapp.com/private/Item/Id/' + id, {
             headers: {
                 "x-access-token": jwt
             }
