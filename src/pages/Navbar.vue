@@ -51,7 +51,6 @@ export default {
       }
     },
     async signout() {
-      await AccountAPI.destoryCookies(this.$cookies.get("UserId"));
       this.$cookies.remove(this.$cookies.get("UserId"));
       this.$cookies.remove("UserId");
       this.$root.reload();

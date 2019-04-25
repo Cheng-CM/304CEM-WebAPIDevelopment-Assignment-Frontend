@@ -121,7 +121,9 @@ export default {
     },
     async join() {
       var jwt = await this.$cookies.get("token");
-
+      if (jwt == null) {
+        this.$router.push("/login");
+      }
       await RaffleAPI.join(this.raffle.id, this.$cookies.get("UserId"), jwt);
     }
   },

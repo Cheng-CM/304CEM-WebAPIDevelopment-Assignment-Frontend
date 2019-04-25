@@ -68,7 +68,7 @@ import BaseButton from "../components/BaseButton.vue";
 import BaseInput from "../components/BaseInput.vue";
 import Card from "../components/Card.vue";
 import AccountAPI from "../api/user.js";
-export default { 
+export default {
   name: "login",
   components: {
     BaseButton,
@@ -92,8 +92,8 @@ export default {
         var response = await AccountAPI.login(params);
         this.status = response.data.message;
         if (response.data.status == "success") {
-          this.$cookies.set("UserId", response.data.data.User, "1y");
-          this.$cookies.set("token", response.data.data.token,'1y')
+          this.$cookies.set("UserId", response.data.data.User, "7d");
+          this.$cookies.set("token", response.data.data.token, "7d");
           this.$router.push("/");
           location.reload();
         }
@@ -102,9 +102,9 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     if (this.$cookies.get("UserId")) {
-      this.$router.push('/');
+      this.$router.push("/");
     }
   }
 };
