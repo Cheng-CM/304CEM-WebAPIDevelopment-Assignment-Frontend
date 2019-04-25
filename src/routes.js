@@ -36,19 +36,19 @@ export default new Router({
             component: Register
         },
         {
-            path: '/Raffles',
+            path: '/raffles',
             name: 'Raffle',
             component: Raffle
         }, {
-            path: '/Profile/:id',
+            path: '/profile/:id',
             name: 'Profile',
             component: Profile
         }, {
-            path: '/Raffle/:id',
+            path: '/raffle/:id',
             name: 'ItemRaffle',
             component: ItemRaffle
         }, {
-            path: '/Item/:id',
+            path: '/item/:id',
             name: 'Item',
             component: Item
         },
