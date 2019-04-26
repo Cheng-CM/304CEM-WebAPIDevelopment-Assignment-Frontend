@@ -1,8 +1,13 @@
 var express = require('express');
 var path = require('path');
 var serveStatic = require('serve-static');
-var app = express();
 var history = require('connect-history-api-fallback');
+var connect = require('connect');
+
+var app = connect()
+    .use(history())
+    .listen(3000);
+
 app.use(serveStatic(__dirname + "/dist"));
 
 if (process.env.NODE_ENV === 'production') {
