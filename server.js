@@ -4,10 +4,8 @@ var serveStatic = require('serve-static');
 var history = require('connect-history-api-fallback');
 var connect = require('connect');
 
-var app = connect()
-    .use(history())
-    .listen(3000);
-
+var app = express();
+app.use(history());
 app.use(serveStatic(__dirname + "/dist"));
 
 if (process.env.NODE_ENV === 'production') {
@@ -19,4 +17,4 @@ app.get('*', (request, response) => {
 });
 
 var port = process.env.PORT || 5000;
-app.use(history()).listen(port);
+app.listen(port);
