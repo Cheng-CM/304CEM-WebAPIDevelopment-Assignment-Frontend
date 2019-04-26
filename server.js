@@ -1,20 +1,15 @@
 var express = require('express');
+var serveStatic = require("serve-static")
 var path = require('path');
-var serveStatic = require('serve-static');
-var history = require('connect-history-api-fallback');
-var connect = require('connect');
-
+const history = require('connect-history-api-fallback');
 var app = express();
-app.use(history());
-app.use(serveStatic(__dirname + "/dist"));
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-}
-
-app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+app.use(history({
+    disableDotRule: true,
+    verbose: true
+}));
+app.get('/', function (req, res) {
+    res.render(path.join(__dirname + '/dist/index.html'));
 });
-
-var port = process.env.PORT || 5000;
+app.use(serveStatic(path.join(__dirname, 'dist')));
+var port = process.env.PORT || 80;
 app.listen(port);
