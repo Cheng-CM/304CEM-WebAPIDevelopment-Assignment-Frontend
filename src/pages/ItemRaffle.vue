@@ -58,7 +58,7 @@
             </div>
             <div class="mt-5 py-3 border-top text-center">
               <div class="row">
-                <div class="col-lg-2" v-for="user in joinedUser" v-bind:key="user">
+                <div class="col-lg-2" v-for="user in joinedUser">
                   <p>{{user}}</p>
                 </div>
               </div>
@@ -111,8 +111,7 @@ export default {
       this.user.username = user.data.username;
       for (let i = 0; i < this.raffle.joined.length; i++) {
         const element = this.raffle.joined[i];
-        await AccountAPI.getUserInfo(element);
-
+        var res = await AccountAPI.getUserInfo(element);
         this.joinedUser[i] = res.data.username;
       }
     },
@@ -129,7 +128,6 @@ export default {
   },
   created() {
     this.loadInfo();
-    this.joinCheck();
   }
 };
 </script>
