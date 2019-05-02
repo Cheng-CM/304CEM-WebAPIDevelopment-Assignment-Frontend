@@ -102,6 +102,11 @@ export default {
       this.raffle.name = res.data.name;
       this.raffle.description = res.data.description;
       this.raffle.joined = res.data.joined;
+      for (let i = 0; i < this.raffle.joined.length; i++) {
+        const element = this.raffle.joined[i];
+        var acc = await AccountAPI.getUserInfo(element);
+        this.joinedUser[i] = acc.data.username;
+      }
       var item = await ItemAPI.findItemById(res.data.item);
       this.item.id = item.data._id;
       this.item.img = item.data.img;
@@ -109,11 +114,6 @@ export default {
       var user = await AccountAPI.getUserInfo(res.data.createdBy);
       this.user.id = user.data._id;
       this.user.username = user.data.username;
-      for (let i = 0; i < this.raffle.joined.length; i++) {
-        const element = this.raffle.joined[i];
-        var res = await AccountAPI.getUserInfo(element);
-        this.joinedUser[i] = res.data.username;
-      }
     },
     joinCheck() {
       return this.$cookies.get("UserId") != this.user.id;
